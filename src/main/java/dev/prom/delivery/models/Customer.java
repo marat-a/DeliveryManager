@@ -1,5 +1,8 @@
-import java.util.List;
+package dev.prom.delivery.models;
+
 import lombok.Data;
+
+import java.util.List;
 
 //Класс, содержащий покупателей
 @Data

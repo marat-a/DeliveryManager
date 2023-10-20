@@ -1,6 +1,8 @@
-import java.math.BigDecimal;
-import java.util.List;
+package dev.prom.delivery.models;
+
 import lombok.Data;
+
+import java.math.BigDecimal;
 
 @Data
 //Класс, содержащий позиции товаров
