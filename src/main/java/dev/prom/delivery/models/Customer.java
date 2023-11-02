@@ -4,11 +4,8 @@ import lombok.Data;
 
 import java.util.List;
 
-//Класс, содержащий покупателей
 @Data
-public class Customer {
-    private Long id;
-    private String name;
-    private String phone, address;
+public class Customer extends User {
+    private String address;
     private List<Order> orders;
 }

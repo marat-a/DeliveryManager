@@ -1,0 +1,29 @@
+#name: Deploy to Timeweb Cloud
+#
+#on:
+#  push:
+#    branches:
+#      - main
+#
+#jobs:
+#  deploy:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v2
+#
+#      - name: Set up Java
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: '17'
+#
+#      - name: Build with Maven
+#        run: mvn package
+
+#      - name: Deploy to Timeweb Cloud
+#        uses: timewebcloud/deploy-action@v1
+#        with:
+#          api_key: ${{ secrets.TIMEWEB_API_KEY }}
+#          app_id: <YOUR_APP_ID>
+#          region: spb

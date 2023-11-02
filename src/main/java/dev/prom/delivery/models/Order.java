@@ -1,14 +1,16 @@
 package dev.prom.delivery.models;
 
-import java.util.Date;
-import java.util.List;
 import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.List;
 //Класс, содержащий заказы
 
 @Data
 public class Order {
     private Long id;
-    private Date date, time;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private List<Product> items;
     private String courier;
     private Customer customer;
