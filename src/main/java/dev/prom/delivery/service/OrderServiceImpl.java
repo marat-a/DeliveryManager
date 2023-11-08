@@ -3,9 +3,10 @@ package dev.prom.delivery.service;
 import dev.prom.delivery.dto.OrderInputDto;
 import dev.prom.delivery.dto.OrderOutputDto;
 import dev.prom.delivery.repository.OrderRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
 
