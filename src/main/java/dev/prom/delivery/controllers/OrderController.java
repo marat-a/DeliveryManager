@@ -4,7 +4,6 @@ package dev.prom.delivery.controllers;
 import dev.prom.delivery.dto.OrderInputDto;
 import dev.prom.delivery.dto.OrderOutputDto;
 import dev.prom.delivery.service.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +11,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
-    @Autowired
+
     private OrderService orderService;
+
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @GetMapping
     public List<OrderOutputDto> getAllOrders() {

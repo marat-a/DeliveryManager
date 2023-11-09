@@ -3,6 +3,7 @@ package dev.prom.delivery.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,16 +18,27 @@ public class Order {
 
     private LocalDateTime endTime;
 
-    @ManyToOne(targetEntity = Product.class)
-    private List<Product> items;
+//    @ManyToOne(targetEntity = Product.class)
+//    private List<Product> items;
+    private String items;
 
-    private String courier;
+    private BigDecimal sum;
+
+//    @Enumerated
+//    private PayStatus payStatus;
+//    @Enumerated
+//    private ProgressStatus progressStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "courier_id")
+    private User courier;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    private String comment;
+    private String commentForCourier;
 
+    private String commentForManager;
 
 }

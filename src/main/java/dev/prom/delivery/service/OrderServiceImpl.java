@@ -2,6 +2,7 @@ package dev.prom.delivery.service;
 
 import dev.prom.delivery.dto.OrderInputDto;
 import dev.prom.delivery.dto.OrderOutputDto;
+import dev.prom.delivery.models.Order;
 import dev.prom.delivery.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +22,17 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderOutputDto updateOrder(Long id, OrderInputDto order) {
-        return null;
+        Order editedOrder = OrderMapper.INSTANCE.orderInputDtoToOrder(order);
+        editedOrder.setId(id);
+        Order updatedOrder = orderRepository.saveAndFlush(editedOrder);
+        return OrderMapper.INSTANCE.orderToOrderOutputDto(updatedOrder);
     }
 
     @Override
     public OrderOutputDto createOrder(OrderInputDto order) {
-        return null;
+        Order newOrder = OrderMapper.INSTANCE.orderInputDtoToOrder(order);
+        newOrder = orderRepository.saveAndFlush(newOrder);
+        return OrderMapper.INSTANCE.orderToOrderOutputDto(newOrder);
     }
 
     @Override
@@ -37,6 +43,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderOutputDto> getAllOrders() {
-        return OrderMapper.INSTANCE.ordersToOrderOutputDtos(orderRepository.findAll());
+        List<Order> orderList = orderRepository.findAll();
+        return OrderMapper.INSTANCE.ordersToOrderOutputDtos(orderList);
     }
 }
