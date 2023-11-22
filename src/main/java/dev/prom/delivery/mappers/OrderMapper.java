@@ -1,16 +1,15 @@
-package dev.prom.delivery.service;
+package dev.prom.delivery.mappers;
 
 import dev.prom.delivery.dto.OrderInputDto;
 import dev.prom.delivery.dto.OrderOutputDto;
 import dev.prom.delivery.models.Order;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
+
+@Mapper(componentModel = "spring")
 public interface OrderMapper {
-    OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     OrderOutputDto orderToOrderOutputDto(Order order);
 

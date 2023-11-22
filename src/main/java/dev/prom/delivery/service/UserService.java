@@ -1,8 +1,5 @@
 package dev.prom.delivery.service;
 
-import dev.prom.delivery.dto.OrderInputDto;
-import dev.prom.delivery.dto.OrderOutputDto;
-import dev.prom.delivery.dto.UserDto;
 import dev.prom.delivery.models.User;
 import org.springframework.stereotype.Service;
 

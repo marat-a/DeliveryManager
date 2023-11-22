@@ -5,7 +5,6 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Data
@@ -18,7 +17,7 @@ public class Order {
 
     private LocalDateTime endTime;
 
-//    @ManyToOne(targetEntity = Product.class)
+    //    @ManyToOne(targetEntity = Product.class)
 //    private List<Product> items;
     private String items;
 

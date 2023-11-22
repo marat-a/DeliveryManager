@@ -1,22 +1,20 @@
 package dev.prom.delivery.service;
 
-import dev.prom.delivery.dto.OrderInputDto;
-import dev.prom.delivery.dto.OrderOutputDto;
+import dev.prom.delivery.models.Order;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-
 @Service
 public interface OrderService {
 
     void deleteOrder(Long id);
 
-    OrderOutputDto updateOrder(Long id, OrderInputDto order);
+    Order updateOrder(Long id, Order order);
 
-    OrderOutputDto createOrder(OrderInputDto order);
+    Order createOrder(Order order);
 
-    OrderOutputDto getOrderById(Long id);
+    Order getOrderById(Long id);
 
-    List<OrderOutputDto> getAllOrders();
+    List<Order> getAllOrders();
 }
