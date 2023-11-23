@@ -3,11 +3,15 @@ package dev.prom.delivery.service;
 import dev.prom.delivery.exceptions.NotFoundException;
 import dev.prom.delivery.models.Order;
 import dev.prom.delivery.repository.OrderRepository;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Getter
+@Setter
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
 
