@@ -2,9 +2,12 @@ package dev.prom.delivery.dto;
 
 import dev.prom.delivery.models.Customer;
 import dev.prom.delivery.models.User;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
-
+@Getter
+@Setter
 public class OrderInputDto {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
