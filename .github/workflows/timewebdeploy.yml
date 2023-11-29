@@ -36,8 +36,8 @@ jobs:
       - name: Deploy to remote
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: target/delivery.jar
-          remote: /dm/delivery.jar
+          local: target/delivery-0.1.jar
+          remote: /dm/delivery-0.1.jar
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
