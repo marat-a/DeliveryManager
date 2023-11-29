@@ -95,7 +95,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>DeliveryApplication.java</mainClass>
+							<mainClass>DeliveryApplication</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
