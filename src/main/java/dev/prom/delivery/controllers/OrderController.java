@@ -17,12 +17,12 @@ class OrderController {
     @Autowired
     public OrderService orderService;
 
+    @Autowired
     public OrderMapper mapper;
 
 
     @GetMapping
     public List<OrderOutputDto> getAllOrders() {
-        System.out.println("Hi");
         return mapper.ordersToOrderOutputDtos(orderService.getAllOrders());
     }
 

@@ -14,7 +14,7 @@ public class Customer extends User {
 
     private String address;
 
-    @OneToMany
+    @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 
 }
