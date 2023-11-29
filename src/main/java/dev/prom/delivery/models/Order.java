@@ -2,11 +2,13 @@ package dev.prom.delivery.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@SuperBuilder
 @Data
 public class Order {
     @Id
@@ -17,16 +19,9 @@ public class Order {
 
     private LocalDateTime endTime;
 
-    //    @ManyToOne(targetEntity = Product.class)
-//    private List<Product> items;
     private String items;
 
     private BigDecimal sum;
-
-//    @Enumerated
-//    private PayStatus payStatus;
-//    @Enumerated
-//    private ProgressStatus progressStatus;
 
     @ManyToOne
     @JoinColumn(name = "courier_id")
