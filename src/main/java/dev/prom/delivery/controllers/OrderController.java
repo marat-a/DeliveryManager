@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/orders")
 @ResponseBody
+@CrossOrigin
 class OrderController {
     @Autowired
     public OrderService orderService;
