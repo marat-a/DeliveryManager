@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 @ResponseBody
-@CrossOrigin
 public class ProductController {
     @Autowired
      ProductService productService;
