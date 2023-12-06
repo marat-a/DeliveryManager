@@ -1,6 +1,6 @@
 package dev.prom.delivery.dto;
 
-import dev.prom.delivery.models.Role;
+import dev.prom.delivery.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

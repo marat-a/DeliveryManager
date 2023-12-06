@@ -1,5 +1,6 @@
 package dev.prom.delivery.models;
 
+import dev.prom.delivery.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 

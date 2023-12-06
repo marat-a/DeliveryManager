@@ -1,4 +1,4 @@
-package dev.prom.delivery.models;
+package dev.prom.delivery.enums;
 
 public enum ProgressStatus {
     NOTAPPROVED,
