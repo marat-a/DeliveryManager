@@ -18,6 +18,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private DeliveryInfo deliveryInfo;
+
     @ManyToOne(targetEntity = Product.class)
     private List<Product> products;
 

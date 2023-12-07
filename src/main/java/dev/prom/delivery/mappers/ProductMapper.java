@@ -1,6 +1,7 @@
 package dev.prom.delivery.mappers;
 
 import dev.prom.delivery.dto.ProductDto;
+import dev.prom.delivery.dto.ProductOutputDto;
 import dev.prom.delivery.models.Product;
 import org.mapstruct.Mapper;
 
@@ -14,5 +15,7 @@ public interface ProductMapper {
 
     Product productDtoToProduct(ProductDto productDto);
 
-    List<ProductDto> productsToProductDtos(List<Product> products);
+    List<ProductOutputDto> productsToProductOutputDtos(List<Product> products);
+    ProductOutputDto productToProductOutputDto(Product product);
+
 }

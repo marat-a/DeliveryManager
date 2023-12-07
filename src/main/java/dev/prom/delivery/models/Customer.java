@@ -9,11 +9,12 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Table(name = "customers")
 public class Customer extends User {
 
     private String address;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Order> orders;
 
 }
