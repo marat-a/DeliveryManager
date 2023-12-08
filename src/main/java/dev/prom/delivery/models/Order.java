@@ -18,6 +18,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "deliveryInfo_id")
     private DeliveryInfo deliveryInfo;
 
     @ManyToOne(targetEntity = Product.class)

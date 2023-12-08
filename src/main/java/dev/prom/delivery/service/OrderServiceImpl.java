@@ -14,9 +14,11 @@ import java.util.List;
 @Setter
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+    private final CustomerService customerService;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, CustomerService customerService) {
         this.orderRepository = orderRepository;
+        this.customerService = customerService;
     }
 
     @Override
@@ -37,6 +39,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
 
     public Order createOrder(Order order) {
+        if (!customerService.isCustomerExists(order.getCustomer().getId())){
+            customerService.createCustomer(order.getCustomer());
+        }
         return orderRepository.saveAndFlush(order);
     }
 
