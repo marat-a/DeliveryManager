@@ -18,11 +18,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "deliveryInfo_id")
     private DeliveryInfo deliveryInfo;
 
-    @ManyToOne(targetEntity = Product.class)
+    @ManyToMany(targetEntity = Product.class)
+    @JoinColumn(name = "product_id")
     private List<Product> products;
 
     private BigDecimal sum;

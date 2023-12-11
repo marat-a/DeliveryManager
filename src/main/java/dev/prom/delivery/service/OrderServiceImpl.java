@@ -1,12 +1,20 @@
 package dev.prom.delivery.service;
 
+import dev.prom.delivery.enums.ProgressStatus;
 import dev.prom.delivery.exceptions.NotFoundException;
+import dev.prom.delivery.models.Customer;
 import dev.prom.delivery.models.Order;
+import dev.prom.delivery.models.Product;
 import dev.prom.delivery.repository.OrderRepository;
+import dev.prom.delivery.repository.ProductRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,15 +23,24 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final CustomerService customerService;
+    private final ProductService productService;
+    private final ProductRepository productRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public OrderServiceImpl(OrderRepository orderRepository, CustomerService customerService) {
+
+    public OrderServiceImpl(OrderRepository orderRepository, CustomerService customerService, ProductService productService,
+                            ProductRepository productRepository) {
         this.orderRepository = orderRepository;
         this.customerService = customerService;
+        this.productService = productService;
+        this.productRepository = productRepository;
     }
 
     @Override
     public void deleteOrder(Long id) {
         if (orderRepository.existsById(id)) {
+            customerService.deleteOrderById(getOrderById(id).getCustomer().getId(), id);
             orderRepository.deleteById(id);
         } else throw new NotFoundException("Order not found");
     }
@@ -33,16 +50,34 @@ public class OrderServiceImpl implements OrderService {
         if (orderRepository.existsById(id)) {
             order.setId(id);
         } else throw new NotFoundException("Order not found");
-        return orderRepository.saveAndFlush(order);
+        return orderRepository.save(order);
     }
 
     @Override
-
+    @Transactional
     public Order createOrder(Order order) {
-        if (!customerService.isCustomerExists(order.getCustomer().getId())){
-            customerService.createCustomer(order.getCustomer());
+        if (order.getProgressStatus() == null){
+            order.setProgressStatus(ProgressStatus.NOTAPPROVED);
         }
-        return orderRepository.saveAndFlush(order);
+        if (order.getProducts() != null) {
+            for (Product product : order.getProducts()) {
+                if (product.getId() == null) {
+                    product = productService.createProduct(product);
+                } else  product= productService.getProductById(product.getId());
+            }
+        }
+        if (order.getCustomer().getId() == null) {
+            customerService.createCustomer(order.getCustomer());
+            List<Order> orderList = new ArrayList<>();
+            orderList.add(order);
+            order.getCustomer().setOrders(orderList);
+        } else {
+            Customer customer = customerService.getCustomerById(order.getCustomer().getId());
+            customer.getOrders().add(order);
+            order.setCustomer(customer);
+        }
+
+        return orderRepository.save(order);
     }
 
     @Override

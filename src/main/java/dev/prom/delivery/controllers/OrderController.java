@@ -16,10 +16,8 @@ import java.util.List;
 class OrderController {
     @Autowired
     public OrderService orderService;
-
     @Autowired
     public OrderMapper mapper;
-
 
     @GetMapping
     public List<OrderOutputDto> getAllOrders() {

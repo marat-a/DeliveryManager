@@ -11,14 +11,17 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "deliveryInfos")
+@Table(name = "deliveryInfo")
 public class DeliveryInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+
     private LocalDateTime startTime;
 
     private LocalDateTime endTime;
+
     @ManyToOne
     @JoinColumn(name = "courier_id")
     private User courier;

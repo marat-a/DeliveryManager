@@ -1,11 +1,13 @@
 package dev.prom.delivery.service;
 
+import dev.prom.delivery.enums.Role;
 import dev.prom.delivery.exceptions.NotFoundException;
 import dev.prom.delivery.models.Customer;
 import dev.prom.delivery.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -33,6 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer createCustomer(Customer customer) {
+        customer.setRole(Role.CUSTOMER);
         return customerRepository.saveAndFlush(customer);
     }
 
@@ -51,5 +54,11 @@ public class CustomerServiceImpl implements CustomerService {
     public boolean isCustomerExists(Long id) {
 
         return customerRepository.existsById(id);
+    }
+
+    @Override
+    public void deleteOrderById(Long customerId, Long orderId) {
+getCustomerById(customerId).getOrders().removeIf(order -> Objects.equals(order.getId(), orderId));
+
     }
 }

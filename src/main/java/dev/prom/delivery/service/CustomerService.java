@@ -21,4 +21,6 @@ public interface CustomerService {
     List<Customer> getAllCustomers();
 
     boolean isCustomerExists(Long id);
+
+    void deleteOrderById(Long customerId, Long orderId);
 }

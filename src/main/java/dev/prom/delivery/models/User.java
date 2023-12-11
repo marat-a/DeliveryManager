@@ -17,6 +17,7 @@ public class User {
 
     private String name;
 
+    @Column(name = "phone", unique = true)
     private String phone;
 
     @Enumerated
