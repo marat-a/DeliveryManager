@@ -19,19 +19,13 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B spring-boot:run --file pom.xml -Dspring-boot.run.arguments="--spring.datasource.url=${{ secrets.DB_CONNECTION_URL }} --spring.datasource.username=${{ secrets.DB_USERNAME }} --spring.datasource.password=${{ secrets.DB_PASSWORD }}"
       - name: Set up a cache for Maven
         uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-
-      - name: Persist workflow data as artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: github-actions-artifact
-          path: staging
 
       - name: Deploy to remote
         uses: garygrossgarten/github-action-scp@release
