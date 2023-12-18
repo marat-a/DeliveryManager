@@ -17,4 +17,8 @@ public class Customer extends User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Order> orders;
 
+
+    public Customer(String login, String phone, String encode) {
+        super(login, phone, encode);
+    }
 }

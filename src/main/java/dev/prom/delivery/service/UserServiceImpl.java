@@ -3,9 +3,11 @@ package dev.prom.delivery.service;
 import dev.prom.delivery.exceptions.NotFoundException;
 import dev.prom.delivery.models.User;
 import dev.prom.delivery.repository.UserRepository;
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -44,5 +46,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public Optional<User> getByLogin(@NonNull String login) {
+        return userRepository.findByLogin(login);
     }
 }

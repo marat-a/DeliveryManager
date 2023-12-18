@@ -1,6 +1,6 @@
 package dev.prom.delivery.dto;
 
-import dev.prom.delivery.enums.Role;
+import dev.prom.delivery.enums.ERole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +18,5 @@ public class UserOutputDto {
 
     private String phone;
 
-    private Role role;
+    private ERole ERole;
 }

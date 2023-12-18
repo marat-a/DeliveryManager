@@ -1,6 +1,6 @@
 package dev.prom.delivery.dto;
 
-import dev.prom.delivery.enums.Role;
+import dev.prom.delivery.enums.ERole;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +13,6 @@ public class CustomerOutputDto {
 
     private String phone;
 
-    private Role role;
+    private ERole ERole;
     private String address;
 }
