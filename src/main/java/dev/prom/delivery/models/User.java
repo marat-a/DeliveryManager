@@ -1,9 +1,11 @@
 package dev.prom.delivery.models;
 
+import dev.prom.delivery.enums.ERole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
@@ -17,6 +19,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
+@NoArgsConstructor
 
 public class User {
     @Id
@@ -44,6 +47,15 @@ public class User {
     @Size(max = 50)
     private String login;
 
-    public User(String login, String phone, String encode) {
+
+    public User(String phone, String password, String login) {
+        this.phone = phone;
+        this.password = password;
+        this.login = login;
+    }
+    public User(String phone, String password, Set<Role> roles) {
+        this.phone = phone;
+        this.password = password;
+        this.roles = roles;
     }
 }

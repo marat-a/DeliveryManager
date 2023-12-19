@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping()
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -52,7 +52,7 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -73,7 +73,7 @@ public class AuthController {
                 roles));
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/registration")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByLogin(signUpRequest.getLogin())) {
             return ResponseEntity
@@ -88,9 +88,8 @@ public class AuthController {
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getLogin(),
-                signUpRequest.getPhone(),
-                encoder.encode(signUpRequest.getPassword()));
+        User user = new User(                signUpRequest.getPhone(),
+                encoder.encode(signUpRequest.getPassword()), signUpRequest.getLogin());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

@@ -1,10 +1,7 @@
 package dev.prom.delivery.dto;
 
 import dev.prom.delivery.enums.ERole;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -19,4 +16,7 @@ public class UserOutputDto {
     private String phone;
 
     private ERole ERole;
+
+    public UserOutputDto(String name, String phone, dev.prom.delivery.enums.ERole role) {
+    }
 }
