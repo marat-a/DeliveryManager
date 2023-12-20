@@ -2,6 +2,7 @@ package dev.prom.delivery.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "customers")
+@NoArgsConstructor
 public class Customer extends User {
 
     private String address;

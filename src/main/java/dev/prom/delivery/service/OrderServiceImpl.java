@@ -56,14 +56,14 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public Order createOrder(Order order) {
-        if (order.getProgressStatus() == null){
+        if (order.getProgressStatus() == null) {
             order.setProgressStatus(ProgressStatus.NOTAPPROVED);
         }
         if (order.getProducts() != null) {
             for (Product product : order.getProducts()) {
                 if (product.getId() == null) {
                     product = productService.createProduct(product);
-                } else  product= productService.getProductById(product.getId());
+                } else product = productService.getProductById(product.getId());
             }
         }
         if (order.getCustomer().getId() == null) {
@@ -88,5 +88,19 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
+    }
+
+    @Override
+    public Order changeStatus(Long orderId, ProgressStatus status, long courierId) {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new NotFoundException("Order not found"));
+        if (order.getDeliveryInfo().getCourier().getId() == courierId) {
+            order.setProgressStatus(status);
+        }
+        return orderRepository.save(order);
+    }
+
+    @Override
+    public List<Order> getOrdersByCourier(Long courierId) {
+        return orderRepository.findAllByDeliveryInfoCourierId(courierId);
     }
 }

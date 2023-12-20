@@ -39,7 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer createCustomer(Customer customer) {
-        customer.getRoles().add(roleRepository.findByName(ERole.USER)
+        customer.getRoles().add(roleRepository.findByName(ERole.CUSTOMER)
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
         return customerRepository.saveAndFlush(customer);
     }

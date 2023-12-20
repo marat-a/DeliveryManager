@@ -1,0 +1,5 @@
+
+INSERT INTO roles (name) VALUES ('ADMIN');
+INSERT INTO roles (name) VALUES ('COURIER');
+INSERT INTO roles (name) VALUES ('MANAGER');
+INSERT INTO roles (name) VALUES ('CUSTOMER');

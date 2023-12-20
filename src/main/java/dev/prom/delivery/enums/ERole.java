@@ -9,8 +9,8 @@ public enum ERole implements GrantedAuthority {
 
     ADMIN("ADMIN"),
     MANAGER ("MANAGER"),
-
-    USER("USER");
+    COURIER("COURIER"),
+    CUSTOMER("CUSTOMER");
 
     private final String vale;
 

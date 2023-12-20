@@ -1,7 +1,5 @@
-package dev.prom.delivery;
+package dev.prom.delivery.security;
 
-import dev.prom.delivery.security.AuthEntryPointJwt;
-import dev.prom.delivery.security.AuthTokenFilter;
 import dev.prom.delivery.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -58,11 +56,17 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/login/**").permitAll()
-                                .requestMatchers("/registration/**").permitAll()
+                        auth
+                                .requestMatchers("/auth/login/**").permitAll()
+                                .requestMatchers("/auth/registration/**").permitAll()
+                                .requestMatchers("/users/**").hasRole("admin")
+                                .requestMatchers("/customers/**").hasRole("manager")
+                                .requestMatchers("/orders/**").hasRole("manager")
+                                .requestMatchers("/orders/status/**").hasRole("courier")
+                                .requestMatchers("/orders/courier/**").hasAnyRole("manager", "courier")
+                                .requestMatchers("/products/**").hasRole("manager")
                                 .anyRequest().authenticated()
                 );
-
         http.authenticationProvider(authenticationProvider());
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

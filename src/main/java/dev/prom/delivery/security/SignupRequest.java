@@ -1,4 +1,4 @@
-package dev.prom.delivery;
+package dev.prom.delivery.security;
 
 import java.util.Set;
 
@@ -19,7 +19,7 @@ public class SignupRequest {
     @Email
     private String phone;
 
-    private Set<String> role;
+    private Set<String> roles;
 
     @NotBlank
     @Size(min = 6, max = 40)
