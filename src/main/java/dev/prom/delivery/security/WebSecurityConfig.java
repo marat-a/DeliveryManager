@@ -57,13 +57,13 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
                         auth
-                                .requestMatchers("/auth/login/**").permitAll()
-                                .requestMatchers("/auth/registration/**").permitAll()
-                                .requestMatchers("/users/**").hasRole("admin")
-                                .requestMatchers("/customers/**").hasRole("manager")
-                                .requestMatchers("/orders/**").hasRole("manager")
-                                .requestMatchers("/orders/status/**").hasRole("courier")
-                                .requestMatchers("/orders/courier/**").hasAnyRole("manager", "courier")
+                                .requestMatchers("**").permitAll()
+//                                .requestMatchers("/auth/registration/**").permitAll()
+//                                .requestMatchers("/users/**").hasRole("admin")
+//                                .requestMatchers("/customers/**").hasRole("manager")
+//                                .requestMatchers("/orders/**").hasRole("manager")
+//                                .requestMatchers("/orders/status/**").hasRole("courier")
+//                                .requestMatchers("/orders/courier/**").hasAnyRole("manager", "courier")
                                 .requestMatchers("/products/**").hasRole("manager")
                                 .anyRequest().authenticated()
                 );
