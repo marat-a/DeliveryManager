@@ -1,83 +1,49 @@
 name: Deploy to Docker
-
 on:
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     services:
-      # Label used to access the service container
       postgres:
-        # Docker Hub image
         image: postgres
-        # Provide the password for postgres
-        env:
-          POSTGRES_PASSWORD: user
-          POSTGRES_USER: user
-          POSTGRES_DB: dm
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
+    env:
+      POSTGRES_PASSWORD: sa123456
+      POSTGRES_USER: learning
+      POSTGRES_DB: school_management
+      options: >-
+        --health-cmd pg_isready
+        --health-interval 10s
+        --health-timeout 5s
+        --health-retries 5
     steps:
-      - name: Checkout repository
+      - name: Build
         uses: actions/checkout@v4
-
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-
-      - name: Run tests
+      - name: run tests
         run: mvn test
-
   prepare-environment:
-    runs-on: self-hosted
-    needs: build
-
-    steps:
-      - name: Stop and remove containers, networks
-        run: docker-compose down
-
-      - name: Remove unused data
-        run: docker system prune -a -f
-
+        runs-on: self-hosted
+        needs: test
+        steps:
+          - name: Stop and remove containers, networks
+            run: docker-compose down
+          - name: Remove unused data
+            run: docker system prune -a -f
   deploy:
-    runs-on: self-hosted
-    needs: prepare-environment
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install docker-compose
-
-      - name: Install project dependencies
-        run: npm install  # Replace with the appropriate command to install project dependencies
-
-      - name: Build project
-        run: npm run build  # Replace with the appropriate command to build the project
-
-      - name: Configure Docker Compose environment
-        run: docker-compose config
-
-      - name: Start containers
-        run: docker-compose up -d
-
-      - name: Wait for containers to start
-        run: sleep 10  # Adjust the sleep duration as needed
-
-      - name: Check container status
-        run: docker-compose ps
+        runs-on: self-hosted
+        needs: prepare-environment
+        steps:
+          - name: checkout repo
+            uses: actions/checkout@v3
+          - name: docker-compose
+            run: docker-compose up -d
