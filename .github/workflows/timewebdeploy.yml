@@ -38,9 +38,9 @@ jobs:
         runs-on: self-hosted
         steps:
           - name: Stop and remove containers, networks
-            run: sudo docker-compose down
+            run: docker-compose down
           - name: Remove unused data
-            run: sudo docker system prune -a -f
+            run: docker system prune -a -f
   deploy:
         runs-on: self-hosted
         needs: prepare-environment
@@ -48,4 +48,4 @@ jobs:
           - name: checkout repo
             uses: actions/checkout@v3
           - name: docker-compose
-            run: sudo docker-compose up -d
+            run: docker-compose up -d
