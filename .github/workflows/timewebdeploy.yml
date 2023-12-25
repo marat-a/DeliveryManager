@@ -10,16 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres
-    env:
-      POSTGRES_PASSWORD: user
-      POSTGRES_USER: user
-      POSTGRES_DB: dm
-      options: >-
-        --health-cmd pg_isready
-        --health-interval 10s
-        --health-timeout 5s
-        --health-retries 5
+        image: postgres:latest
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Build
         uses: actions/checkout@v4
@@ -33,6 +36,7 @@ jobs:
         run: mvn test
   prepare-environment:
         runs-on: self-hosted
+        needs: test
         steps:
           - name: Stop and remove containers, networks
             run: docker-compose down
