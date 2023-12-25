@@ -64,7 +64,7 @@ public class WebSecurityConfig {
 //                                .requestMatchers("/orders/**").hasRole("manager")
 //                                .requestMatchers("/orders/status/**").hasRole("courier")
 //                                .requestMatchers("/orders/courier/**").hasAnyRole("manager", "courier")
-                                .requestMatchers("/products/**").hasRole("manager")
+//                                .requestMatchers("/products/**").hasRole("manager")
                                 .anyRequest().authenticated()
                 );
         http.authenticationProvider(authenticationProvider());
