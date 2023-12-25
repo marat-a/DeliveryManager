@@ -43,6 +43,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install docker-compose
+
+      - name: Install project dependencies
+        run: npm install  # Replace with the appropriate command to install project dependencies
+
+      - name: Build project
+        run: npm run build  # Replace with the appropriate command to build the project
+
       - name: Configure Docker Compose environment
         run: docker-compose config
 
