@@ -18,8 +18,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "deliveryInfo_id")
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "delivery_info_id")
     private DeliveryInfo deliveryInfo;
 
     @ManyToMany(cascade = CascadeType.ALL)

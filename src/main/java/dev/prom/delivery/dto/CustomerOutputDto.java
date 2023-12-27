@@ -1,8 +1,10 @@
 package dev.prom.delivery.dto;
 
-import dev.prom.delivery.enums.ERole;
+import dev.prom.delivery.models.Role;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 
 @Getter
@@ -13,6 +15,6 @@ public class CustomerOutputDto {
 
     private String phone;
 
-    private ERole ERole;
+    private Set<Role> roles;
     private String address;
 }

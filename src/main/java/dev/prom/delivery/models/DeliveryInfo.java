@@ -3,6 +3,7 @@ package dev.prom.delivery.models;
 import dev.prom.delivery.enums.DeliveryType;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -11,10 +12,11 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "deliveryInfo")
+@Table(name = "delivery_info")
+@NoArgsConstructor
 public class DeliveryInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 

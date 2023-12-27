@@ -16,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableMethodSecurity
 public class WebSecurityConfig {
@@ -59,14 +61,14 @@ public class WebSecurityConfig {
                         auth
                                 .requestMatchers("/auth/login/**").permitAll()
                                 .requestMatchers("/auth/registration/**").permitAll()
-                                .requestMatchers("/users/**").hasAuthority("ROLE_ADMIN")
-                                .requestMatchers("/customers/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
-                                .requestMatchers("/orders/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
-                                .requestMatchers("/orders/status/**").hasAuthority("ROLE_COURIER")
-                                .requestMatchers("/orders/courier/**").hasAuthority("ROLE_COURIER")
-                                .requestMatchers("/products/**").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers("/users/**").hasAuthority("ADMIN")
+                                .requestMatchers("/customers/**").hasAnyAuthority("ADMIN", "MANAGER")
+                                .requestMatchers("/orders/**").hasAnyAuthority("ADMIN", "MANAGER")
+                                .requestMatchers("/orders/status/**").hasAuthority("COURIER")
+                                .requestMatchers("/orders/courier/**").hasAuthority("COURIER")
+                                .requestMatchers("/products/**").hasAuthority("ADMIN")
                                 .anyRequest().authenticated()
-                );
+                ).cors(withDefaults());
         http.authenticationProvider(authenticationProvider());
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

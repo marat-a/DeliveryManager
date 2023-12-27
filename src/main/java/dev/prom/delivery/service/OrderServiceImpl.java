@@ -20,6 +20,7 @@ import java.util.List;
 @Service
 @Getter
 @Setter
+@Transactional
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final CustomerService customerService;
@@ -56,6 +57,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public Order createOrder(Order order) {
+
         if (order.getProgressStatus() == null) {
             order.setProgressStatus(ProgressStatus.NOTAPPROVED);
         }
@@ -66,7 +68,7 @@ public class OrderServiceImpl implements OrderService {
                 } else product = productService.getProductById(product.getId());
             }
         }
-        if (order.getCustomer() != null && (order.getCustomer().getId() == null || order.getCustomer().getId() == 0 )) {
+        if (order.getCustomer() != null && order.getCustomer().getId() == null) {
             order.setCustomer(customerService.createCustomer(order.getCustomer()));
             List<Order> orderList = new ArrayList<>();
             orderList.add(order);
@@ -76,7 +78,9 @@ public class OrderServiceImpl implements OrderService {
             customer.getOrders().add(order);
             order.setCustomer(customer);
         }
-
+        if (order.getDeliveryInfo() != null) {
+            order.setDeliveryInfo(entityManager.merge(order.getDeliveryInfo()));
+        }
         return orderRepository.save(order);
     }
 

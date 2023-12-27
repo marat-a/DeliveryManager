@@ -7,10 +7,10 @@ import org.springframework.security.core.GrantedAuthority;
 @RequiredArgsConstructor
 public enum ERole implements GrantedAuthority {
 
-    ADMIN("ROLE_ADMIN"),
-    MANAGER("ROLE_MANAGER"),
-    COURIER("ROLE_COURIER"),
-    CUSTOMER("ROLE_CUSTOMER");
+    ADMIN("ADMIN"),
+    MANAGER("MANAGER"),
+    COURIER("COURIER"),
+    CUSTOMER("CUSTOMER");
 
     private final String vale;
 
