@@ -66,8 +66,8 @@ public class OrderServiceImpl implements OrderService {
                 } else product = productService.getProductById(product.getId());
             }
         }
-        if (order.getCustomer().getId() == null) {
-            customerService.createCustomer(order.getCustomer());
+        if (order.getCustomer() != null && (order.getCustomer().getId() == null || order.getCustomer().getId() == 0 )) {
+            order.setCustomer(customerService.createCustomer(order.getCustomer()));
             List<Order> orderList = new ArrayList<>();
             orderList.add(order);
             order.getCustomer().setOrders(orderList);

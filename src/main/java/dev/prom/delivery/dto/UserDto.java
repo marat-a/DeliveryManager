@@ -1,10 +1,13 @@
 package dev.prom.delivery.dto;
 
 import dev.prom.delivery.enums.ERole;
+import dev.prom.delivery.models.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,5 +19,5 @@ public class UserDto {
 
     private String phone;
 
-    private ERole ERole;
+    private Set<Role> roles;
 }

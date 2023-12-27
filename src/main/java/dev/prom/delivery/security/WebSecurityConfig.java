@@ -57,14 +57,14 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
                         auth
-                                .requestMatchers("**").permitAll()
-//                                .requestMatchers("/auth/registration/**").permitAll()
-//                                .requestMatchers("/users/**").hasRole("admin")
-//                                .requestMatchers("/customers/**").hasRole("manager")
-//                                .requestMatchers("/orders/**").hasRole("manager")
-//                                .requestMatchers("/orders/status/**").hasRole("courier")
-//                                .requestMatchers("/orders/courier/**").hasAnyRole("manager", "courier")
-                                .requestMatchers("/products/**").hasRole("manager")
+                                .requestMatchers("/auth/login/**").permitAll()
+                                .requestMatchers("/auth/registration/**").permitAll()
+                                .requestMatchers("/users/**").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers("/customers/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
+                                .requestMatchers("/orders/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
+                                .requestMatchers("/orders/status/**").hasAuthority("ROLE_COURIER")
+                                .requestMatchers("/orders/courier/**").hasAuthority("ROLE_COURIER")
+                                .requestMatchers("/products/**").hasAuthority("ROLE_ADMIN")
                                 .anyRequest().authenticated()
                 );
         http.authenticationProvider(authenticationProvider());

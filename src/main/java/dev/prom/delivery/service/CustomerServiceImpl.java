@@ -3,13 +3,16 @@ package dev.prom.delivery.service;
 import dev.prom.delivery.enums.ERole;
 import dev.prom.delivery.exceptions.NotFoundException;
 import dev.prom.delivery.models.Customer;
+import dev.prom.delivery.models.Role;
 import dev.prom.delivery.repository.CustomerRepository;
 import dev.prom.delivery.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -39,6 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer createCustomer(Customer customer) {
+        customer.setRoles(new HashSet<>());
         customer.getRoles().add(roleRepository.findByName(ERole.CUSTOMER)
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
         return customerRepository.saveAndFlush(customer);
