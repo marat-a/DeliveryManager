@@ -1,20 +1,26 @@
 package dev.prom.delivery.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@Table(name = "customers")
+@NoArgsConstructor
 public class Customer extends User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     private String address;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Order> orders;
 
+
+    public Customer(String login, String phone, String encode) {
+        super(login, phone, encode);
+    }
 }

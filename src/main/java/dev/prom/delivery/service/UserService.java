@@ -1,9 +1,11 @@
 package dev.prom.delivery.service;
 
 import dev.prom.delivery.models.User;
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -17,4 +19,6 @@ public interface UserService {
     User getUserById(Long id);
 
     List<User> getAllUsers();
+
+    Optional<User> getByLogin(@NonNull String login);
 }

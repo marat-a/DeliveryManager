@@ -1,44 +1,45 @@
 package dev.prom.delivery.models;
 
+import dev.prom.delivery.enums.PayStatus;
+import dev.prom.delivery.enums.ProgressStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDateTime startTime;
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "delivery_info_id")
+    private DeliveryInfo deliveryInfo;
 
-    private LocalDateTime endTime;
-
-    //    @ManyToOne(targetEntity = Product.class)
-//    private List<Product> items;
-    private String items;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "order_products",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Product> products;
 
     private BigDecimal sum;
 
-//    @Enumerated
-//    private PayStatus payStatus;
-//    @Enumerated
-//    private ProgressStatus progressStatus;
+    private BigDecimal paid;
 
-    @ManyToOne
-    @JoinColumn(name = "courier_id")
-    private User courier;
+    @Enumerated
+    private PayStatus payStatus;
+    @Enumerated
+    private ProgressStatus progressStatus;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
-
-    private String commentForCourier;
 
     private String commentForManager;
 
