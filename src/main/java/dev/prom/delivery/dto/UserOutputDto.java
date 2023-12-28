@@ -21,8 +21,6 @@ public class UserOutputDto {
 
     private String phone;
 
-    private String password;
-
     private Set<Role> roles;
 
     private String login;

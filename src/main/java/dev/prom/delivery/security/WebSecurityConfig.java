@@ -62,12 +62,12 @@ public class WebSecurityConfig {
                                 .requestMatchers("/auth/login/**").permitAll()
                                 .requestMatchers("/auth/registration/**").permitAll()
                                 .requestMatchers("/roles/**").hasAuthority("ADMIN")
-                                .requestMatchers("/users/**").hasAuthority("ADMIN")
+                                .requestMatchers("/users/**").hasAnyAuthority("ADMIN", "MANAGER")
                                 .requestMatchers("/customers/**").hasAnyAuthority("ADMIN", "MANAGER")
                                 .requestMatchers("/orders/**").hasAnyAuthority("ADMIN", "MANAGER")
                                 .requestMatchers("/orders/status/**").hasAuthority("COURIER")
                                 .requestMatchers("/orders/courier/**").hasAuthority("COURIER")
-                                .requestMatchers("/products/**").hasAuthority("ADMIN")
+                                .requestMatchers("/products/**").hasAnyAuthority("ADMIN", "MANAGER")
                                 .anyRequest().authenticated()
                 ).cors(withDefaults());
         http.authenticationProvider(authenticationProvider());
