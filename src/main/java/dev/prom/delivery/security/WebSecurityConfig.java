@@ -61,6 +61,7 @@ public class WebSecurityConfig {
                         auth
                                 .requestMatchers("/auth/login/**").permitAll()
                                 .requestMatchers("/auth/registration/**").permitAll()
+                                .requestMatchers("/roles/**").hasAuthority("ADMIN")
                                 .requestMatchers("/users/**").hasAuthority("ADMIN")
                                 .requestMatchers("/customers/**").hasAnyAuthority("ADMIN", "MANAGER")
                                 .requestMatchers("/orders/**").hasAnyAuthority("ADMIN", "MANAGER")

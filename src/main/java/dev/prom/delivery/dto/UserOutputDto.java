@@ -2,6 +2,9 @@ package dev.prom.delivery.dto;
 
 import dev.prom.delivery.enums.ERole;
 import dev.prom.delivery.models.Role;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.Set;
@@ -18,8 +21,11 @@ public class UserOutputDto {
 
     private String phone;
 
+    private String password;
+
     private Set<Role> roles;
 
-    public UserOutputDto(String name, String phone, dev.prom.delivery.enums.ERole role) {
-    }
+    private String login;
+
+
 }
